@@ -56,7 +56,7 @@ exports.create = async (task, callback) => {
     let _task = new Task({
         _id: new mongoose.Types.ObjectId(),
         description: task.description,
-        startDate: new Date(),
+        startDate: new Date(task.startDate),
         finishDate: new Date(task.finishDate)
     });
     // Saving the Task model
