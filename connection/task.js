@@ -24,7 +24,7 @@ exports.connectToDb = function (callback) {
 };
 
 // Function to get the information of a matched document
-exports.list = async function (callback) {
+exports.list = async (callback) => {
     // Fetch the dish information
     await Task.find(function (err, success) {
         if (err) {
@@ -37,9 +37,9 @@ exports.list = async function (callback) {
 };
 
 // Function to get the information of a matched document
-exports.getById = async function (taskId, callback) {
+exports.getById = async (taskId, callback) => {
     // Fetch the dish information
-    await Task.findById(taskId,function (err, success) {
+    await Task.findById(taskId, function (err, success) {
         if (err) {
             console.log("Error fetching the doc " + err);
             callback(err);
@@ -50,7 +50,7 @@ exports.getById = async function (taskId, callback) {
 };
 
 // Function to create the task
-exports.create = async function (task, callback) {
+exports.create = async (task, callback) => {
 
     // To create the model for new Task
     let _task = new Task({
@@ -60,7 +60,7 @@ exports.create = async function (task, callback) {
         finishDate: new Date(task.finishDate)
     });
     // Saving the Task model
-    _task.save(function (err, success) {
+    await _task.save(function (err, success) {
         if (err) {
             console.log("[create] Error creating the doc " + err);
             callback(err);
@@ -71,8 +71,8 @@ exports.create = async function (task, callback) {
 };
 
 // Function to update the task
-exports.update = async function (taskId, task, callback) {
-    Task.find({_id: taskId}, function (err, success) {
+exports.update = async (taskId, task, callback) => {
+    await Task.find({_id: taskId}, function (err, success) {
         if (err) {
             console.log("[get] Error fetching the doc " + err);
             callback(err);
@@ -101,7 +101,7 @@ exports.update = async function (taskId, task, callback) {
 
 };
 
-exports.remove = async function(taskId, callback){
+exports.remove = async (taskId, callback) => {
     await Task.findOneAndRemove({_id: taskId}, function (err, success) {
         if (err) {
             console.log("[delete] Error deleting the doc " + err);
